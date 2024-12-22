@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Good Fact"
 include(":app")
- 
+include(":data:core")
+include(":domain:core")
