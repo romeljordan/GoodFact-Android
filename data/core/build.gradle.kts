@@ -40,6 +40,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.hilt.android)
     implementation(libs.retrofit)
+    implementation(libs.retrofit.gson.converter)
+    implementation(libs.okHttp3)
+    implementation(libs.gson)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
