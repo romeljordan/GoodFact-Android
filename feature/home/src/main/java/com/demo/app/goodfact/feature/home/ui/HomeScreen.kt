@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.demo.app.goodfact.feature.core.GoodFactScreen
 import com.demo.app.goodfact.feature.daily.navigation.dailyFactScreen
+import com.demo.app.goodfact.feature.favorite.navigation.favoriteFactListScreen
 import com.demo.app.goodfact.feature.random.navigation.randomFactScreen
 
 @Composable
@@ -35,6 +36,8 @@ internal fun HomeScreen() {
             randomFactScreen()
 
             dailyFactScreen()
+
+            favoriteFactListScreen()
         }
     }
 }

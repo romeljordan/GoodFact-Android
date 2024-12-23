@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace = "com.demo.app.goodfact.feature.home"
-    compileSdk = 35
+    namespace = "com.demo.app.goodfact.feature.favorite"
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28
@@ -54,7 +54,6 @@ dependencies {
 
     implementation(project(":feature:core"))
     implementation(project(":feature:daily"))
-    implementation(project(":feature:favorite"))
     implementation(project(":feature:random"))
 
     testImplementation(libs.junit)

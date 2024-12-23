@@ -68,6 +68,8 @@ dependencies {
     implementation(project(":data:core"))
     implementation(project(":domain:core"))
     implementation(project(":feature:core"))
+    implementation(project(":feature:daily"))
+    implementation(project(":feature:favorite"))
     implementation(project(":feature:home"))
     implementation(project(":feature:random"))
 
