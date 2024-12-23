@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.demo.app.goodfact"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.demo.app.goodfact"
-        minSdk = 27
-        targetSdk = 34
+        minSdk = 28
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
@@ -66,6 +67,11 @@ dependencies {
 
     implementation(project(":data:core"))
     implementation(project(":domain:core"))
+    implementation(project(":feature:core"))
+    implementation(project(":feature:daily"))
+    implementation(project(":feature:favorite"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:random"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

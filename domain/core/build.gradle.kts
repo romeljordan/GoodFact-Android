@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.demo.app.goodfact.domain.core"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
-        minSdk = 27
+        minSdk = 28
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

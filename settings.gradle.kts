@@ -23,3 +23,8 @@ rootProject.name = "Good Fact"
 include(":app")
 include(":data:core")
 include(":domain:core")
+include(":feature:home")
+include(":feature:core")
+include(":feature:random")
+include(":feature:daily")
+include(":feature:favorite")
