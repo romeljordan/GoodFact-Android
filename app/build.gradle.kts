@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":domain:core"))
     implementation(project(":feature:core"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:random"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

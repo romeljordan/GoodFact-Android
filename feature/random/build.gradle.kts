@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace = "com.demo.app.goodfact.feature.home"
-    compileSdk = 35
+    namespace = "com.demo.app.goodfact.feature.random"
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28
@@ -53,7 +53,6 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     implementation(project(":feature:core"))
-    implementation(project(":feature:random"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

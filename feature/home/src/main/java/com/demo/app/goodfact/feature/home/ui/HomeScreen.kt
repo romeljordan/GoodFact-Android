@@ -12,6 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.demo.app.goodfact.feature.core.GoodFactScreen
+import com.demo.app.goodfact.feature.random.navigation.randomFactScreen
 
 @Composable
 internal fun HomeScreen() {
@@ -27,9 +29,9 @@ internal fun HomeScreen() {
         NavHost(
             modifier = Modifier.padding(innerPaddingValues),
             navController = navController,
-            startDestination = ""
+            startDestination = GoodFactScreen.RandomFactScreen.route
         ) {
-
+            randomFactScreen()
         }
     }
 }
