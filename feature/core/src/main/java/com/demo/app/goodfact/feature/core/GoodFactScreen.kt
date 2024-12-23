@@ -6,3 +6,9 @@ sealed class GoodFactScreen(val route: String) {
     data object DailyFactScreen : GoodFactScreen("daily_fact_screen_nav_route")
     data object FavoriteFactListScreen : GoodFactScreen("favorite_fact_list_screen_nav_route")
 }
+
+val bottomBarScreens = listOf(
+    GoodFactScreen.RandomFactScreen,
+    GoodFactScreen.DailyFactScreen,
+    GoodFactScreen.FavoriteFactListScreen
+)
