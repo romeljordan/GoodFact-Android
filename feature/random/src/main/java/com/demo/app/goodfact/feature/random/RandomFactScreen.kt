@@ -21,6 +21,7 @@ import com.demo.app.goodfact.feature.core.composable.FactCardView
 import com.demo.app.goodfact.feature.core.config.AppColor
 import com.demo.app.goodfact.feature.core.config.Constants
 import com.demo.app.goodfact.feature.random.composable.ActionButton
+import com.demo.app.goodfact.feature.random.viewmodel.RandomFactScreenIntent
 import com.demo.app.goodfact.feature.random.viewmodel.RandomFactViewModel
 import com.demo.app.goodfact.feature.random.viewmodel.RandomFactViewState
 
@@ -30,11 +31,17 @@ internal fun RandomFactRoute(
 ) {
     val viewState by viewModel.viewState.collectAsState()
 
-    RandomFactScreen(state = viewState)
+    RandomFactScreen(
+        state = viewState,
+        intentListener = viewModel::intentListener
+    )
 }
 
 @Composable
-private fun RandomFactScreen(state: RandomFactViewState) {
+private fun RandomFactScreen(
+    state: RandomFactViewState,
+    intentListener: (intent: RandomFactScreenIntent) -> Unit
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = AppColor.ghostWhite
@@ -43,7 +50,6 @@ private fun RandomFactScreen(state: RandomFactViewState) {
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(16.dp)
-                .padding(bottom = 16.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -61,25 +67,27 @@ private fun RandomFactScreen(state: RandomFactViewState) {
             ) {
                 ActionButton(
                     iconIdRes = R.drawable.ic_keyboard_backspace_24,
-                    color = AppColor.blue,
-                    modifier = Modifier.clickable {
-                        // TODO: add functionality
-                    }
+                    isEnabled = state.previousFact != null,
+                    onClickListener = {
+                        intentListener.invoke(RandomFactScreenIntent.GoToPrevious)
+                    },
+                    color = AppColor.blue
                 )
 
                 ActionButton(
                     iconIdRes = R.drawable.ic_share_24,
                     color = AppColor.blue,
-                    modifier = Modifier.clickable {
-                        // TODO: add functionality
+                    onClickListener = {
+
                     }
                 )
 
                 ActionButton(
                     iconIdRes = R.drawable.ic_arrow_forward_24,
                     color = AppColor.blue,
-                    modifier = Modifier.clickable {
-                        // TODO: add functionality
+                    isEnabled = state.preloadFact != null,
+                    onClickListener =  {
+                        intentListener.invoke(RandomFactScreenIntent.GoToNext)
                     }
                 )
             }
@@ -91,6 +99,7 @@ private fun RandomFactScreen(state: RandomFactViewState) {
 @Composable
 private fun PreviewRandomFactScreen() {
     RandomFactScreen(
-        state = RandomFactViewState(currentFact = Constants.storedFacts.random())
+        state = RandomFactViewState(currentFact = Constants.storedFacts.random()),
+        intentListener = { }
     )
 }

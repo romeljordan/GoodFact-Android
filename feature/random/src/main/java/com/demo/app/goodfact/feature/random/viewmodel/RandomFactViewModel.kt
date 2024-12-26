@@ -13,6 +13,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+sealed interface RandomFactScreenIntent {
+    data object GoToPrevious: RandomFactScreenIntent
+    data object Share: RandomFactScreenIntent
+    data object GoToNext: RandomFactScreenIntent
+}
+
 @HiltViewModel
 class RandomFactViewModel @Inject constructor(
     private val useCase: FactGeneratorUseCase
@@ -25,7 +31,16 @@ class RandomFactViewModel @Inject constructor(
     )
 
     init {
-        // TODO: load latest facts
+        loadCurrentFact()
+        preloadNext()
+    }
+
+    fun intentListener(intent: RandomFactScreenIntent) {
+        when (intent) {
+            RandomFactScreenIntent.GoToPrevious -> goToPrevious()
+            RandomFactScreenIntent.GoToNext -> goToNext()
+            else -> { /*no-op */ }
+        }
     }
 
     private fun loadCurrentFact() = viewModelScope.launch(Dispatchers.IO) {
@@ -55,5 +70,27 @@ class RandomFactViewModel @Inject constructor(
                 }
                 _viewState.update { it.copy(preloadFact = randomFact) }
             }
+    }
+
+    private fun goToNext() {
+        _viewState.update {
+            it.copy(
+                previousFact = it.currentFact,
+                currentFact = it.preloadFact
+            )
+        }
+        preloadNext()
+    }
+
+    private fun goToPrevious() {
+        if (_viewState.value.previousFact != null) {
+            _viewState.update {
+                it.copy(
+                    previousFact = null,
+                    currentFact = it.previousFact,
+                    preloadFact = it.currentFact
+                )
+            }
+        }
     }
 }
