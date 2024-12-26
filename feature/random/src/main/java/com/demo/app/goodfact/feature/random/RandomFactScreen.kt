@@ -1,28 +1,22 @@
 package com.demo.app.goodfact.feature.random
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.demo.app.goodfact.domain.core.model.Fact
 import com.demo.app.goodfact.feature.core.composable.FactCardView
+import com.demo.app.goodfact.feature.core.config.Constants
 import com.demo.app.goodfact.feature.random.viewmodel.RandomFactViewModel
 import com.demo.app.goodfact.feature.random.viewmodel.RandomFactViewState
 
@@ -46,12 +40,14 @@ private fun RandomFactScreen(state: RandomFactViewState) {
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
-            FactCardView(
-                fact = Fact(id = "", content = "Content", source = "source"),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-            )
+            state.currentFact?.let { fact ->
+                FactCardView(
+                    fact = Fact(id = fact.id, content = fact.content, source = fact.source),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                )
+            }
             Row (
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -68,5 +64,7 @@ private fun RandomFactScreen(state: RandomFactViewState) {
 @Preview(apiLevel = 34)
 @Composable
 private fun PreviewRandomFactScreen() {
-    RandomFactScreen(state = RandomFactViewState())
+    RandomFactScreen(
+        state = RandomFactViewState(currentFact = Constants.storedFacts.random())
+    )
 }

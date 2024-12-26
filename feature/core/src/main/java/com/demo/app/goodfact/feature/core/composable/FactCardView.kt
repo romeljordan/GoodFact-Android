@@ -58,7 +58,7 @@ fun FactCardView(
                 text = "source: ${fact.source}",
                 color = Color.Gray,
                 fontStyle = FontStyle.Italic,
-                fontWeight = FontWeight.Thin,
+                fontWeight = FontWeight.Light,
                 fontSize = 14.sp
             )
         }
