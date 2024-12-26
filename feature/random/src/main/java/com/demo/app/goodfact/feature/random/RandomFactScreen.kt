@@ -2,6 +2,7 @@ package com.demo.app.goodfact.feature.random
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.demo.app.goodfact.domain.core.model.Fact
 import com.demo.app.goodfact.feature.core.R
 import com.demo.app.goodfact.feature.core.composable.FactCardView
+import com.demo.app.goodfact.feature.core.composable.LoadingAnimationView
 import com.demo.app.goodfact.feature.core.config.AppColor
 import com.demo.app.goodfact.feature.core.config.Constants
 import com.demo.app.goodfact.feature.random.composable.ActionButton
@@ -60,7 +63,12 @@ private fun RandomFactScreen(
                         .fillMaxWidth()
                         .weight(1f)
                 )
-            }
+            } ?: LoadingAnimationView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                bgColor = Color.Transparent
+            )
             Row (
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
