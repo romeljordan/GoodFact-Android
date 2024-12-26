@@ -1,11 +1,12 @@
 package com.demo.app.goodfact.feature.random
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -15,8 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.demo.app.goodfact.domain.core.model.Fact
+import com.demo.app.goodfact.feature.core.R
 import com.demo.app.goodfact.feature.core.composable.FactCardView
+import com.demo.app.goodfact.feature.core.config.AppColor
 import com.demo.app.goodfact.feature.core.config.Constants
+import com.demo.app.goodfact.feature.random.composable.ActionButton
 import com.demo.app.goodfact.feature.random.viewmodel.RandomFactViewModel
 import com.demo.app.goodfact.feature.random.viewmodel.RandomFactViewState
 
@@ -32,13 +36,16 @@ internal fun RandomFactRoute(
 @Composable
 private fun RandomFactScreen(state: RandomFactViewState) {
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        containerColor = AppColor.ghostWhite
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(16.dp)
-                .fillMaxSize()
+                .padding(bottom = 16.dp)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             state.currentFact?.let { fact ->
                 FactCardView(
@@ -49,13 +56,32 @@ private fun RandomFactScreen(state: RandomFactViewState) {
                 )
             }
             Row (
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Button(
-                    onClick = { }
-                ) {
+                ActionButton(
+                    iconIdRes = R.drawable.ic_keyboard_backspace_24,
+                    color = AppColor.blue,
+                    modifier = Modifier.clickable {
+                        // TODO: add functionality
+                    }
+                )
 
-                }
+                ActionButton(
+                    iconIdRes = R.drawable.ic_share_24,
+                    color = AppColor.blue,
+                    modifier = Modifier.clickable {
+                        // TODO: add functionality
+                    }
+                )
+
+                ActionButton(
+                    iconIdRes = R.drawable.ic_arrow_forward_24,
+                    color = AppColor.blue,
+                    modifier = Modifier.clickable {
+                        // TODO: add functionality
+                    }
+                )
             }
         }
     }
