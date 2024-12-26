@@ -38,4 +38,22 @@ class RandomFactViewModel @Inject constructor(
                 _viewState.update { it.copy(currentFact = randomFact) }
             }
     }
+
+    private fun preloadNext() = viewModelScope.launch(Dispatchers.IO) {
+        useCase.generateRandomFact()
+            .onSuccess { fact ->
+                if (_viewState.value.currentFact?.id == fact.id) {
+
+                } else {
+                    _viewState.update { it.copy(preloadFact = fact) }
+                }
+            }
+            .onFailure {
+                var randomFact = Constants.storedFacts.random()
+                while (randomFact.id == _viewState.value.currentFact?.id) {
+                    randomFact = Constants.storedFacts.random()
+                }
+                _viewState.update { it.copy(preloadFact = randomFact) }
+            }
+    }
 }
