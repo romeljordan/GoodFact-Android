@@ -33,7 +33,9 @@ internal fun DailyFactRoute(
 private fun DailyFactScreen(
     currentFact: Fact
 ) {
-    Scaffold { innerPadding ->
+    Scaffold(
+        modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
         FactCardView(
             fact = currentFact,
             modifier = Modifier
