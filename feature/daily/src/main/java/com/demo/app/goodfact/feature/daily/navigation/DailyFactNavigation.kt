@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.demo.app.goodfact.feature.core.GoodFactScreen
-import com.demo.app.goodfact.feature.daily.DailyFactScreen
+import com.demo.app.goodfact.feature.daily.DailyFactRoute
 
 fun NavController.navigateToDailyFact() {
     navigate(route = GoodFactScreen.DailyFactScreen.route)
@@ -12,6 +12,6 @@ fun NavController.navigateToDailyFact() {
 
 fun NavGraphBuilder.dailyFactScreen() {
     composable(route = GoodFactScreen.DailyFactScreen.route) {
-        DailyFactScreen()
+        DailyFactRoute()
     }
 }
