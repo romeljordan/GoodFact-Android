@@ -52,8 +52,10 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    implementation(project(":domain:core"))
     implementation(project(":feature:core"))
-    implementation(project(":feature:random"))
+
+    debugImplementation(libs.ui.tooling)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
