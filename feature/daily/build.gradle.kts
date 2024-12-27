@@ -50,10 +50,13 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
 
+    implementation(project(":domain:core"))
     implementation(project(":feature:core"))
-    implementation(project(":feature:random"))
+
+    debugImplementation(libs.ui.tooling)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
