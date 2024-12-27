@@ -1,5 +1,6 @@
 package com.demo.app.goodfact.feature.daily
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -13,6 +14,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.demo.app.goodfact.domain.core.model.Fact
 import com.demo.app.goodfact.feature.core.composable.FactCardView
 import com.demo.app.goodfact.feature.core.composable.LoadingAnimationView
+import com.demo.app.goodfact.feature.core.config.AppColor
 import com.demo.app.goodfact.feature.daily.viewmodel.DailyFactViewModel
 
 @Composable
@@ -24,7 +26,9 @@ internal fun DailyFactRoute(
     dailyFact?.let {
         DailyFactScreen(it)
     } ?: LoadingAnimationView(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(AppColor.ghostWhite)
     )
 
 }
@@ -34,7 +38,8 @@ private fun DailyFactScreen(
     currentFact: Fact
 ) {
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        containerColor = AppColor.ghostWhite
     ) { innerPadding ->
         FactCardView(
             fact = currentFact,
