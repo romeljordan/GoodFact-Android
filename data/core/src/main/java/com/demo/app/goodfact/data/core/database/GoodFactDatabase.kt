@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.demo.app.goodfact.data.core.database.converter.FactTypeConverter
 import com.demo.app.goodfact.data.core.database.dao.FavoriteFactDao
 import com.demo.app.goodfact.data.core.database.entity.FavoriteFactEntity
 
@@ -13,6 +15,7 @@ import com.demo.app.goodfact.data.core.database.entity.FavoriteFactEntity
         FavoriteFactEntity::class
     ]
 )
+@TypeConverters(FactTypeConverter::class)
 abstract class GoodFactDatabase : RoomDatabase() {
     abstract fun favoriteFactDao(): FavoriteFactDao
 
