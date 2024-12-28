@@ -1,6 +1,6 @@
-package com.demo.app.goodfact.domain.core.dto
+package com.demo.app.goodfact.data.core.dto
 
-import com.demo.app.goodfact.domain.core.Dto
+import com.demo.app.goodfact.data.core.Dto
 import com.demo.app.goodfact.domain.core.model.Fact
 
 data class FactDto(

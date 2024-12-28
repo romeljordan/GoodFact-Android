@@ -1,7 +1,7 @@
 package com.demo.app.goodfact.di.repository
 
 import com.demo.app.goodfact.domain.core.repository.FactGeneratorRepository
-import com.demo.app.goodfact.domain.core.repository.FactGeneratorRepositoryImpl
+import com.demo.app.goodfact.data.core.repository.FactGeneratorRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
