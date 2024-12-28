@@ -14,6 +14,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+sealed interface FavoriteFactListScreenIntent {
+    data class Remove(val id: String): FavoriteFactListScreenIntent
+}
+
 @HiltViewModel
 class FavoriteFactListViewModel @Inject constructor(
     private val useCase: FavoriteFactUseCase
@@ -27,6 +31,12 @@ class FavoriteFactListViewModel @Inject constructor(
 
     init {
         fetchFavorites()
+    }
+
+    fun bindIntentListener(intent: FavoriteFactListScreenIntent) {
+        when (intent) {
+            is FavoriteFactListScreenIntent.Remove -> removeFavorite(intent.id)
+        }
     }
 
     fun removeFavorite(id: String) = viewModelScope.launch(Dispatchers.IO) {
