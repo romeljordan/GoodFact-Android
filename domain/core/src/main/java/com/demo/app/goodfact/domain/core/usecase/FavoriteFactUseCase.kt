@@ -22,7 +22,7 @@ final class FavoriteFactUseCaseImpl @Inject constructor(
         val result = repository.addFavorite(fact)
         return when (result) {
             true -> Result.success(true)
-            false -> Result.failure(RuntimeException(message = "Failed to add fact to favorites"))
+            false -> Result.failure(Throwable(message = "Failed to add fact to favorites"))
         }
     }
 
@@ -30,7 +30,7 @@ final class FavoriteFactUseCaseImpl @Inject constructor(
         val result = repository.removeFavorite(id)
         return when (result) {
             true -> Result.success(true)
-            false -> Result.failure(RuntimeException(message = "Failed to remove fact in favorites"))
+            false -> Result.failure(Throwable(message = "Failed to remove fact in favorites"))
         }
     }
 }
