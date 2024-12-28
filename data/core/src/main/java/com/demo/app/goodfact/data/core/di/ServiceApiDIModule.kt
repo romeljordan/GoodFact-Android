@@ -1,6 +1,6 @@
-package com.demo.app.goodfact.domain.core.di
+package com.demo.app.goodfact.data.core.di
 
-import com.demo.app.goodfact.domain.core.api.FactGeneratorServiceApi
+import com.demo.app.goodfact.data.core.api.FactGeneratorServiceApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

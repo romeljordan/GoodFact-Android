@@ -1,7 +1,7 @@
 package com.demo.app.goodfact.di.datasource
 
-import com.demo.app.goodfact.domain.core.api.FactGeneratorServiceApi
-import com.demo.app.goodfact.domain.core.datasource.FactGeneratorRemoteDataSource
+import com.demo.app.goodfact.data.core.api.FactGeneratorServiceApi
+import com.demo.app.goodfact.data.core.datasource.FactGeneratorRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.demo.app.goodfact.domain.core.di
+package com.demo.app.goodfact.data.core.di
 
 import com.google.gson.Gson
 import dagger.Module

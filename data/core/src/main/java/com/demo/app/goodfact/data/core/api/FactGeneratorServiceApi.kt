@@ -1,6 +1,6 @@
-package com.demo.app.goodfact.domain.core.api
+package com.demo.app.goodfact.data.core.api
 
-import com.demo.app.goodfact.domain.core.dto.FactDto
+import com.demo.app.goodfact.data.core.dto.FactDto
 import retrofit2.Response
 import retrofit2.http.GET
 

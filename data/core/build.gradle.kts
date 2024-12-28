@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.okHttp3)
     implementation(libs.gson)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.room)
+    annotationProcessor(libs.androidx.room.compiler)
     kapt(libs.hilt.android.compiler)
 
     implementation(project(":domain:core"))

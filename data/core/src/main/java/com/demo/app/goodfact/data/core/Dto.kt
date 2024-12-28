@@ -1,4 +1,4 @@
-package com.demo.app.goodfact.domain.core
+package com.demo.app.goodfact.data.core
 
 interface Dto<R> {
     val domainModel: () -> R

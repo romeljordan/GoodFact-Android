@@ -1,7 +1,8 @@
-package com.demo.app.goodfact.domain.core.repository
+package com.demo.app.goodfact.data.core.repository
 
-import com.demo.app.goodfact.domain.core.datasource.FactGeneratorRemoteDataSource
+import com.demo.app.goodfact.data.core.datasource.FactGeneratorRemoteDataSource
 import com.demo.app.goodfact.domain.core.model.Fact
+import com.demo.app.goodfact.domain.core.repository.FactGeneratorRepository
 import javax.inject.Inject
 
 final class FactGeneratorRepositoryImpl @Inject constructor(
