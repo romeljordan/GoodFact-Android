@@ -2,6 +2,7 @@ package com.demo.app.goodfact.feature.favorite
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.demo.app.goodfact.domain.core.model.Fact
-import com.demo.app.goodfact.feature.core.composable.LoadingAnimationView
 import com.demo.app.goodfact.feature.core.config.AppColor
 import com.demo.app.goodfact.feature.favorite.composable.FavoriteFactItemView
 import com.demo.app.goodfact.feature.favorite.viewmodel.FavoriteFactListScreenIntent
@@ -50,7 +50,6 @@ private fun FavoriteFactListScreen(
         Box(
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(16.dp)
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
@@ -64,7 +63,8 @@ private fun FavoriteFactListScreen(
             } else {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    contentPadding = PaddingValues(16.dp)
                 ) {
                     favorites.forEachIndexed { index, fact ->
                         item(key = fact.id) {
