@@ -1,5 +1,6 @@
 package com.demo.app.goodfact.feature.random
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,6 +45,8 @@ private fun RandomFactScreen(
     state: RandomFactViewState,
     intentListener: (intent: RandomFactScreenIntent) -> Unit
 ) {
+    val context = LocalContext.current
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = AppColor.ghostWhite
@@ -92,8 +96,16 @@ private fun RandomFactScreen(
                 ActionButton(
                     iconIdRes = R.drawable.ic_share_24,
                     color = AppColor.blue,
+                    isEnabled = state.currentFact != null,
                     onClickListener = {
-
+                        state.currentFact?.let {
+                            val intent = Intent(Intent.ACTION_SEND).apply {
+                                putExtra(Intent.EXTRA_TEXT, "\"${it.content}\" from source: ${it.source}")
+                                type = "text/plain"
+                            }
+                            val shareIntent = Intent.createChooser(intent, null)
+                            context.startActivity(shareIntent)
+                        }
                     }
                 )
 
