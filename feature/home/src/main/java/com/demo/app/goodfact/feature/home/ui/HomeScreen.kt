@@ -15,10 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.demo.app.goodfact.feature.core.GoodFactScreen
 import com.demo.app.goodfact.feature.daily.navigation.dailyFactScreen
-import com.demo.app.goodfact.feature.daily.navigation.navigateToDailyFact
 import com.demo.app.goodfact.feature.favorite.navigation.favoriteFactListScreen
-import com.demo.app.goodfact.feature.favorite.navigation.navigateToFavoriteFactList
-import com.demo.app.goodfact.feature.random.navigation.navigateToRandomFact
+import com.demo.app.goodfact.feature.home.navigation.navigateToTabTop
 import com.demo.app.goodfact.feature.random.navigation.randomFactScreen
 
 @Composable
@@ -27,12 +25,7 @@ internal fun HomeScreen() {
     var selectedScreen by remember { mutableStateOf<GoodFactScreen>(GoodFactScreen.RandomFactScreen) }
 
     LaunchedEffect(selectedScreen) {
-        when (selectedScreen) {
-            GoodFactScreen.RandomFactScreen -> navController.navigateToRandomFact()
-            GoodFactScreen.DailyFactScreen -> navController.navigateToDailyFact()
-            GoodFactScreen.FavoriteFactListScreen -> navController.navigateToFavoriteFactList()
-            else -> { /* no-op */ }
-        }
+        navController.navigateToTabTop(selectedScreen)
     }
 
     Scaffold(
