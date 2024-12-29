@@ -1,8 +1,6 @@
 package com.demo.app.goodfact.feature.random
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -62,7 +59,16 @@ private fun RandomFactScreen(
                     fact = Fact(id = fact.id, content = fact.content, source = fact.source),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f)
+                        .weight(1f),
+                    isFavorite = state.favoritesId.contains(fact.id),
+                    onTapFavorite = { value ->
+                        if (value) {
+                            intentListener.invoke(RandomFactScreenIntent.Save(fact))
+                        } else {
+                            intentListener.invoke(RandomFactScreenIntent.RemoveToFavorites(fact.id))
+                        }
+
+                    }
                 )
             } ?: LoadingAnimationView(
                 modifier = Modifier

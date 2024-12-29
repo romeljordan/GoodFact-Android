@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,38 +16,51 @@ import com.demo.app.goodfact.domain.core.model.Fact
 import com.demo.app.goodfact.feature.core.composable.FactCardView
 import com.demo.app.goodfact.feature.core.composable.LoadingAnimationView
 import com.demo.app.goodfact.feature.core.config.AppColor
+import com.demo.app.goodfact.feature.daily.viewmodel.DailyFactIntent
 import com.demo.app.goodfact.feature.daily.viewmodel.DailyFactViewModel
+import com.demo.app.goodfact.feature.daily.viewmodel.DailyFactViewState
 
 @Composable
 internal fun DailyFactRoute(
     viewModel: DailyFactViewModel = hiltViewModel()
 ) {
-    val dailyFact by viewModel.currentFact.collectAsStateWithLifecycle()
+    val viewState by viewModel.viewState.collectAsStateWithLifecycle()
 
-    dailyFact?.let {
-        DailyFactScreen(it)
-    } ?: LoadingAnimationView(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AppColor.ghostWhite)
+    DailyFactScreen(
+        viewState = viewState,
+        intentListener = viewModel::bindIntentListener
     )
-
 }
 
 @Composable
 private fun DailyFactScreen(
-    currentFact: Fact
+    viewState: DailyFactViewState,
+    intentListener: (intent: DailyFactIntent) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = AppColor.ghostWhite
     ) { innerPadding ->
-        FactCardView(
-            fact = currentFact,
+        viewState.current?.let { currentFact ->
+            FactCardView(
+                fact = currentFact,
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(16.dp)
+                    .fillMaxSize(),
+                isFavorite = viewState.isFavorite,
+                onTapFavorite = { value ->
+                    when (value) {
+                        true -> intentListener.invoke(DailyFactIntent.SaveToFavorites)
+                        false -> intentListener.invoke(DailyFactIntent.RemoveToFavorites)
+                    }
+                }
+            )
+        } ?: LoadingAnimationView(
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(16.dp)
-                .fillMaxSize()
+                .fillMaxSize(),
+            bgColor = Color.Transparent
         )
     }
 }
@@ -54,5 +68,10 @@ private fun DailyFactScreen(
 @Preview(apiLevel = 34)
 @Composable
 private fun PreviewDailyFactScreen() {
-    DailyFactScreen(currentFact = Fact(id = "", content = "This is a sample content.", source = "new source"))
+    DailyFactScreen(
+        viewState = DailyFactViewState(
+            current = Fact(id = "", content = "This is a sample content.", source = "new source")
+        ),
+        intentListener = { }
+    )
 }
