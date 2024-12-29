@@ -32,7 +32,8 @@ fun FactCardView(
     fact: Fact,
     modifier: Modifier = Modifier,
     isFavorite: Boolean = false,
-    bgColor: Color = AppColor.blue
+    bgColor: Color = AppColor.blue,
+    onTapFavorite: (value: Boolean) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -52,9 +53,9 @@ fun FactCardView(
                 .align(Alignment.TopEnd)
                 .padding(16.dp)
                 .clickable {
-                    // TODO: add functionality
+                    onTapFavorite.invoke(!isFavorite)
                 },
-            tint = Color.White
+            tint = if (isFavorite) Color.Red else Color.White
         )
         Column(
             modifier = Modifier
@@ -96,6 +97,7 @@ private fun PreviewFactCard() {
             id = "",
             content = "This is a content of random fun fact.",
             source = "me"
-        )
+        ),
+        onTapFavorite = { }
     )
 }

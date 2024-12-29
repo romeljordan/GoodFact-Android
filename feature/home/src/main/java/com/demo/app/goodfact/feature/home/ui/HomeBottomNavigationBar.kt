@@ -3,12 +3,15 @@ package com.demo.app.goodfact.feature.home.ui
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.demo.app.goodfact.feature.core.GoodFactScreen
 import com.demo.app.goodfact.feature.core.R
 import com.demo.app.goodfact.feature.core.bottomBarScreens
+import com.demo.app.goodfact.feature.core.config.AppColor
 
 @Composable
 internal fun HomeBottomNavigationBar(
@@ -17,7 +20,8 @@ internal fun HomeBottomNavigationBar(
     onSelectScreen: (screen: GoodFactScreen) -> Unit
 ) {
     NavigationBar(
-        modifier = modifier
+        modifier = modifier,
+        containerColor = Color.White
     ) {
         bottomBarScreens.forEach { screen ->
             NavigationBarItem(
@@ -32,7 +36,8 @@ internal fun HomeBottomNavigationBar(
                                 else -> R.drawable.ic_notes_24
                             }
                         ),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = AppColor.blue
                     )
                 },
                 onClick = { onSelectScreen.invoke(screen) }

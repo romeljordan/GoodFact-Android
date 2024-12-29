@@ -2,12 +2,16 @@ package com.demo.app.goodfact.feature.random.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.demo.app.goodfact.domain.core.model.Fact
 import com.demo.app.goodfact.domain.core.usecase.FactGeneratorUseCase
+import com.demo.app.goodfact.domain.core.usecase.FavoriteFactUseCase
 import com.demo.app.goodfact.feature.core.config.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -17,11 +21,14 @@ sealed interface RandomFactScreenIntent {
     data object GoToPrevious: RandomFactScreenIntent
     data object Share: RandomFactScreenIntent
     data object GoToNext: RandomFactScreenIntent
+    data class Save(val fact: Fact): RandomFactScreenIntent
+    data class RemoveToFavorites(val id: String): RandomFactScreenIntent
 }
 
 @HiltViewModel
 class RandomFactViewModel @Inject constructor(
-    private val useCase: FactGeneratorUseCase
+    private val useCase: FactGeneratorUseCase,
+    private val favoriteFactUseCase: FavoriteFactUseCase
 ) : ViewModel() {
     private val _viewState = MutableStateFlow(RandomFactViewState())
     val viewState = _viewState.stateIn(
@@ -33,12 +40,15 @@ class RandomFactViewModel @Inject constructor(
     init {
         loadCurrentFact()
         preloadNext()
+        fetchFavorites()
     }
 
     fun intentListener(intent: RandomFactScreenIntent) {
         when (intent) {
             RandomFactScreenIntent.GoToPrevious -> goToPrevious()
             RandomFactScreenIntent.GoToNext -> goToNext()
+            is RandomFactScreenIntent.Save -> favoriteFact(intent.fact)
+            is RandomFactScreenIntent.RemoveToFavorites -> removeFavoriteFact(intent.id)
             else -> { /*no-op */ }
         }
     }
@@ -92,5 +102,23 @@ class RandomFactViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    private fun fetchFavorites() = viewModelScope.launch(Dispatchers.IO) {
+        favoriteFactUseCase.fetchFavorites().collectLatest { favorites ->
+            _viewState.update {
+                it.copy(
+                    favoritesId = favorites.map { l -> l.id }
+                )
+            }
+        }
+    }
+
+    private fun favoriteFact(fact: Fact) = viewModelScope.launch(Dispatchers.IO) {
+        favoriteFactUseCase.addFavorite(fact)
+    }
+
+    private fun removeFavoriteFact(id: String) = viewModelScope.launch(Dispatchers.IO) {
+        favoriteFactUseCase.removeFavorite(id)
     }
 }
