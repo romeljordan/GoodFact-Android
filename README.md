@@ -10,22 +10,22 @@ It was developed using Kotlin as base language, and Jetpack Compose for the whol
 It shows the random fun facts. User can see previous, and next facts. User can also saved the current fun fact or share it to the other apps.
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/732b97c4-fd45-4ee7-bb54-f81faef7edbd" width="300"/>
-  <img src="https://github.com/user-attachments/assets/1457dabb-5d37-4f25-b4c3-afd9b3528d835" width="300"/>
+  <img src="https://github.com/user-attachments/assets/3d48a626-9202-4e75-9718-bd035dbc9ff7" width="300"/>
+  <img src="https://github.com/user-attachments/assets/55543b5c-6e43-4dce-97f4-2004bfb319cd" width="300"/>
 </p>
 
 ## Daily Fact Screen
 This screen shows the daily fun fact to user. This refreshes every day.
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/29d39fee-4453-4657-9d03-e33cd40c4b8c" width="300"/>
+  <img src="https://github.com/user-attachments/assets/9343fb52-0493-4c47-b3dd-d956c8f764e1" width="300"/>
 </p>
 
 ## Favorite List Screen
 It lists the saved facts by the user.
 
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/13605ac9-b74f-4339-8ca7-c8bef8a07e85" width="300"/>
+  <img src="https://github.com/user-attachments/assets/622f1039-4bc2-4106-ba6a-b84ffb26183b" width="300"/>
 </p>
 
 # Special Thanks To
